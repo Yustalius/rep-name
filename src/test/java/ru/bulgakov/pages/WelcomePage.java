@@ -23,6 +23,7 @@ public class WelcomePage {
 return this;
     }
 }
+
 // Welcome Page
 //Payment Page
 //Последний метод verifyPage
