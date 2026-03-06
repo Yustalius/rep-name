@@ -6,15 +6,16 @@ import static com.codeborne.selenide.Selenide.$;
 
 
 public class YandexSearchPage {
-private final SelenideElement searchInput = $("#text");
-private final SelenideElement submitButton =  $("[type=submit]");
+  private final SelenideElement searchInput = $("#text"),
+                                submitButton = $("[type=submit]");
 
-    public YandexSearchPage search(String query) {
-        searchInput.setValue(query); //яндекс поиск
+  public YandexSearchPage search(String query) {
+    searchInput.setValue(query); //яндекс поиск
     return this;
-    }
-    public YandexResultsSearchPage submit() {
-        submitButton.click();
-        return new YandexResultsSearchPage();
-    }
+  }
+
+  public YandexResultsSearchPage submit() {
+    submitButton.click();
+    return new YandexResultsSearchPage();
+  }
 }

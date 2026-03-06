@@ -7,27 +7,23 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class WelcomePage {
-    private final SelenideElement tryQaMentorButton =  $x("/html/body/div[1]/div[42]/div/div/div[32]/div/a");
-    private final SelenideElement payButtonText =  $(byText("Бегу оплачивать"));
+  private final SelenideElement tryQaMentorButton = $x("/html/body/div[1]/div[42]/div/div/div[32]/div/a"),
+                                payButtonText = $(byText("Бегу оплачивать")),
+                                priceMenuButton = $$(".t-menu__list li").last();
 
+  public WelcomePage openStudySection() {
+    priceMenuButton.click();
+    return this;
+  }
 
-    public WelcomePage enterWelcomePage() {
+  public WelcomePage clickTryQaMentor() {
+    tryQaMentorButton.click();
+    return this;
+  }
 
-        sleep(3000);
-        switchTo().window(1);
-        $$(".t-menu__list li").last().click(); // welcome page for study.
-        tryQaMentorButton.click(); //xpath
-        return this;
-    }
+  public PaymentPage clickPayment() {
+    payButtonText.click();
 
-    public WikiPage locateWiki () {
-
-        return new WikiPage();
-    }
-
-    public PaymentPage clickPayment () {
-        payButtonText.click();
-
-        return new PaymentPage();
-    }
+    return new PaymentPage();
+  }
 }
