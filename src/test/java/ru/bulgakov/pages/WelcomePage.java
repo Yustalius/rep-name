@@ -1,29 +1,33 @@
 package ru.bulgakov.pages;
 
-import static com.codeborne.selenide.Condition.text;
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class WelcomePage {
+    private final SelenideElement tryQaMentorButton =  $x("/html/body/div[1]/div[42]/div/div/div[32]/div/a");
+    private final SelenideElement payButtonText =  $(byText("Бегу оплачивать"));
 
 
-    public WelcomePage clickPrice() {
+    public WelcomePage enterWelcomePage() {
+
         sleep(3000);
-
-
         switchTo().window(1);
         $$(".t-menu__list li").last().click(); // welcome page for study.
-        $x("/html/body/div[1]/div[42]/div/div/div[32]/div/a").click(); //xpath
-        $(byText("Бегу оплачивать")).click();
+        tryQaMentorButton.click(); //xpath
+        return this;
+    }
 
-        switchTo().window(2);
-        $(".styles-module-scss-module__t92_WG__price h2").shouldHave(text("47 000")); // страница оплаты
+    public WikiPage locateWiki () {
 
-return this;
+        return new WikiPage();
+    }
+
+    public PaymentPage clickPayment () {
+        payButtonText.click();
+
+        return new PaymentPage();
     }
 }
-
-// Welcome Page
-//Payment Page
-//Последний метод verifyPage

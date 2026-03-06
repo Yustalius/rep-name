@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class YandexResultsSearchPage {
 
@@ -15,16 +16,10 @@ public class YandexResultsSearchPage {
             return this;
         }
 
-        public WelcomePage openLink(String webSiteName) {
-            $(byText(webSiteName)).click();
+     public WelcomePage openLink(String webSiteName) {
+           $(byText(webSiteName)).click();
 
-            return WelcomePage;
+            return new WelcomePage() ;
         }
-
-
-
-
-
-
 
 }
