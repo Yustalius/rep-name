@@ -1,18 +1,18 @@
-package ru.bulgakov.qa;
+package ru.bulgakov.mentor.qa;
 
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.ElementsCollection;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import ru.bulgakov.pages.WelcomePage;
-import ru.bulgakov.pages.WikiPage;
-import ru.bulgakov.pages.YandexSearchPage;
+import ru.bulgakov.mentor.pages.WelcomePage;
+import ru.bulgakov.mentor.pages.WikiPage;
+import ru.bulgakov.mentor.pages.YandexSearchPage;
+import ru.bulgakov.webshop.TestBase;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class SearchTest {
+public class SearchTest extends TestBase {
   @Test
   @DisplayName("Проверка 47к")
   @Tag("POSITIVE")
@@ -69,7 +69,7 @@ public class SearchTest {
         .submit()
         .closeDefaultBrowserSelectWindow()
         .openLinkAs("ru.wikipedia.org", WikiPage.class)
-        .switchToWiki(1)
+            .switchToWiki(1)
         .checkPersonBirthDate("25 декабря 1642");
   }
 }
