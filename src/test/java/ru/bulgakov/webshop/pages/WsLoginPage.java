@@ -1,6 +1,7 @@
 package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -20,11 +21,13 @@ public class WsLoginPage {
         return this;
     }
 
+    @Step("Ввести электронную почту {email}")
     public WsLoginPage enterEmail(String email) {
         emailInput.setValue(email);
         return this;
     }
 
+    @Step("Ввести пароль {password}")
     public WsLoginPage enterPassword(String password) {
         passwordInput.setValue(password);
         return this;
@@ -35,11 +38,13 @@ public class WsLoginPage {
         return this;
     }
 
+    @Step("Подтверждение авторизации")
     public WsWelcomePage submitLogin() {
         loginButton.click();
         return new WsWelcomePage();
     }
 
+    @Step("Появление сообщения  с ошибкой валидации почты")
     public WsLoginPage verifyValidatiionErrorMessage() {
         $("span.field-validation-error").shouldBe(visible);
         return this;
