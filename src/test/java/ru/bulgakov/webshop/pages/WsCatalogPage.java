@@ -2,6 +2,7 @@ package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -17,6 +18,7 @@ public class WsCatalogPage {
     //WELCOME PAGE -> CATALOG PAGE -> PRODUCT PAGE -> CART PAGE
 
     //CATALOG
+    @Step("Выбор первого продукта в каталоге.")
     public WsProductPage selectCertainProduct() {
         firstCartProduct.click();
         return new WsProductPage();

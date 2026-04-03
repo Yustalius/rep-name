@@ -20,14 +20,14 @@ public class RegistrationTest extends TestBase {
 
 
     @Test
-    @Owner("Kirill S.")
     @Tag("positive")
     @Severity(CRITICAL)
+    @DisplayName("Успешная регистрация нового пользователя")
+    @Owner("Kirill S.")
+    @Link("TASK-220")
     @Epic("Authorization")
     @Story("Регистрация пользователя")
     @Feature("Authorization")
-    @Link("TASK-220")
-    @DisplayName("Успешная регистрация нового пользователя")
     @Description("Создаем пользователя через интерфейс")
     void registartionTest(){
         String password = faker.harryPotter().character() + faker.number().positive();
@@ -41,11 +41,10 @@ public class RegistrationTest extends TestBase {
                 .enterLastName(faker.name().lastName())
                 .enterEmail(email)
                 .enterPassword(password)
-                .enterConfirmPassword("ava")
+                .enterConfirmPassword(password)
                 .submitRegistration()
                 .checkRegistrationCompleted()
                 .checkUserLoggedIn(email);
-        sleep(50000);
 
     }
 }

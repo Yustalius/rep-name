@@ -1,7 +1,12 @@
 package ru.bulgakov.webshop.tests;
 
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.bulgakov.mentor.pages.WelcomePage;
 import ru.bulgakov.webshop.TestBase;
@@ -14,6 +19,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.BLOCKER;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
@@ -30,6 +37,11 @@ public class CartTest extends TestBase {
     }
 
     @Test
+    @Tag("positive")
+    @DisplayName("Успешное добавление товара в корзину")
+    @Owner("Kirill S.")
+    @Severity(BLOCKER)
+    @Link("TASK-221")
     void POaddItemCartTest() {
 
         WsProductPage productPage = new WsProductPage();
@@ -52,41 +64,5 @@ public class CartTest extends TestBase {
                 .verifyItemName(itemName)
                 .verifyCartItemQuantity(itemQuantity)
                 .verifyCartValue(itemPrice, itemQuantity, processorPrice);
-    }
-    @Test
-    void addItemToCartTest() {
-        open(WEB_SHOP_URL);
-        //hoverComputerMenu
-        $$("ul.top-menu li a").get(1).hover();
-        //Click Desktops
-        $(byText("Desktops")).click();
-        //click First product
-        $$("div.product-grid div").get(0).click();
-
-        String itemName = $("[itemprop=name]").getText();
-        String itemPrice = $("[itemprop=price]").getText();
-        String itemQuantity = "2";
-
-        //ItemQuantityInput
-        $("input.qty-input").setValue(itemQuantity);
-        //AddToCart
-        //notificationSuccessMessage
-        //checkHeadbarCartItemQuantity
-        //ChangeProccessorType
-        $$("dl dd ul").get(0).$$("li input").get(0).click();
-        //ClickCartButton
-        $("input.add-to-cart-button").click();
-        $("span.cart-qty").shouldHave(text("(" + itemQuantity + ")"));
-
-        $("div.bar-notification.success").shouldBe(visible);
-        $("a.ico-cart").click();
-        //CheckItemName
-        $("a.product-name").shouldHave(text(itemName));
-        //CheckCartItemQuantity
-        String itemQuantityInCart = $("input.qty-input").getAttribute("value");
-        assertEquals(itemQuantity, itemQuantityInCart);
-        //CheckCartValue
-        $("span.product-subtotal").shouldHave(text(String.valueOf
-                (Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity))));
     }
 }

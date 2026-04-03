@@ -2,6 +2,7 @@ package ru.bulgakov.mentor.qa;
 
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -11,11 +12,15 @@ import ru.bulgakov.mentor.pages.YandexSearchPage;
 import ru.bulgakov.webshop.TestBase;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.*;
 
 public class SearchTest extends TestBase {
   @Test
-  @DisplayName("Проверка 47к")
   @Tag("POSITIVE")
+  @DisplayName("Проверка цены услуги менторства")
+  @Owner("Kirill S.")
+  @Severity(CRITICAL)
+  @Link("TASK-27")
   void mentroingPriceShouldBe47000Test() {
     Configuration.timeout = 5000; //прогрузка элементов
     Configuration.pageLoadTimeout = 5000;//прогрузка страницы
@@ -30,6 +35,7 @@ public class SearchTest extends TestBase {
         .openLink("ivanbulgakovqa.ru");
 
     // Сайт открылся в новой вкладке — переключаемся на неё прямо в тесте
+
     switchTo().window(1);
 
     // Продолжаем работу с WelcomePage уже на новой вкладке
@@ -43,6 +49,14 @@ public class SearchTest extends TestBase {
 
   // Тест с отдельным методом openWikiLink — простой вариант исправления
   @Test
+  @Tag("POSITIVE")
+  @DisplayName("Проверка даты рождения")
+  @Owner("Kirill S.")
+  @Severity(NORMAL)
+  @Link("TASK-280")
+  @Epic("Страница персонажа")
+  @Feature("Личное описание")
+  @Story("Верное отображение личных данных")
   void birthDateShouldBe25December1642Year() {
     Configuration.timeout = 20000; //прогрузка элементов
     Configuration.pageLoadTimeout = 20000;//прогрузка страницы
@@ -59,6 +73,11 @@ public class SearchTest extends TestBase {
 
   // Тот же тест, но через generic-метод openLinkAs — улучшенный вариант
   @Test
+  @Tag("POSITIVE")
+  @DisplayName("Проверка даты рождения")
+  @Owner("Kirill S.")
+  @Severity(NORMAL)
+  @Link("TASK-280")
   void birthDateGenericPageObjectTest() {
     Configuration.timeout = 20000;
     Configuration.pageLoadTimeout = 20000;

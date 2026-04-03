@@ -1,10 +1,10 @@
 package ru.bulgakov.webshop.tests;
 
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
 import net.datafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.bulgakov.webshop.TestBase;
@@ -13,6 +13,8 @@ import ru.bulgakov.webshop.pages.WsWelcomePage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 import static ru.bulgakov.webshop.config.Config.*;
 
 public class LoginTest extends TestBase {
@@ -40,6 +42,10 @@ public class LoginTest extends TestBase {
         }
 
         @Test
+        @Severity(CRITICAL)
+        @DisplayName("Успешная логинизация нового пользователя")
+        @Owner("Kirill S.")
+        @Link("TASK-35")
         void succesLoginTest(){
 
             open(WEB_SHOP_URL, WsWelcomePage.class)
@@ -50,13 +56,14 @@ public class LoginTest extends TestBase {
                     .rememberMeCheck()
                     .submitLogin()
                     .checkUserLoggedIn(email);
-
-            sleep(50000);
-
         }
     }
 
     @ParameterizedTest(name = "Авторизация с невалидным email: {0}")
+    @Severity(NORMAL)
+    @Owner("Kirill S.")
+    @Link("TASK-220")
+    @Tag("negative")
     @CsvFileSource(resources = "/emails.csv")
     void invalidEmailLoginTest(String email) {
         open(WEB_SHOP_LOGIN_URL, WsLoginPage.class)
