@@ -1,5 +1,6 @@
 package ru.bulgakov.webshop.steps;
 
+import io.qameta.allure.Step;
 import net.datafaker.Faker;
 import ru.bulgakov.webshop.pages.WsRegistrationPage;
 
@@ -9,6 +10,7 @@ import static ru.bulgakov.webshop.config.Config.WEB_SHOP_REGISTRATION_URL;
 public class AuthSteps {
     private static final Faker faker = new Faker();
 
+    @Step("Быстрая регистрация")
     public void registerNewUser() {
         open(WEB_SHOP_REGISTRATION_URL, WsRegistrationPage.class)
                 .register(
